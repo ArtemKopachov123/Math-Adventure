@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration</title>
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Montserrat", sans-serif;
+}
+body {
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 10px;
+    display: flex;
+    background: #5ac0f7;
+    justify-content: center;
+    align-items: center;
+}
+.login_form {
+    width: 100%;
+    max-width: 435px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 41px 30px;
+}
+.login_form h3 {
+    font-size: 20px;
+    text-align: center;
+}
+.login_form .log_option {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.login_form .log_option .option {
+    width: calc(100% / 2 - 12px);
+}
+.login_form .log_option .option a {
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background: #F8F8FB;
+    border: 1px solid #d7d7f5;
+    border-radius: 12px;
+    margin: 34px 0 24px 0;
+    font-weight: 500;
+    transition: 0.2s ease;
+}
+
+.login_form .log_option .option a img {
+    max-width: 25px;
+}
+.login_form p {
+    text-align: center;
+    font-weight: 500;
+}
+
+form .box input {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #d7d7f5;
+    border-radius: 10px;
+    outline: none;
+    background: #F8F8FB;
+    font-size: 17px;
+    padding: 0px 20px;
+    margin-bottom: 25px;
+    transition: 0.2s ease;
+}
+
+form .box .password {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+form .box {
+    position: relative;
+}
+a {
+    text-decoration: none;
+    color: #37363d;
+    font-weight: 500;
+}
+a:hover {
+    text-decoration: underline;
+}
+form button {
+    width: 100%;
+    height: 56px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: #fae253;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-bottom: 28px;
+    transition: 0.3s ease;
+}
+form button:hover {
+    background: #45a049;
+}
+  </style>
+</head>
+<body>
+  <div class="login_form">
+    <form action="/Math Adventures" method="post">
+      <h3>Log in with</h3>
+      <div class="log_option">
+        <div class="option">
+            <a href="#">
+                <span>Apple</span>
+            </a>
+          </div>
+        <div class="option">
+          <a href="#">
+            <span>Google</span>
+          </a>
+        </div>
+      </div>
+      <div class="box">
+        <label for="email">Email</label>
+        <input type="email" id="email" name = "email" placeholder="Enter email address" required />
+      </div>
+      <div class="box">
+        <div class="password">
+          <label for="password">Password</label>
+          <a href="#">Forgot Password?</a>
+        </div>
+        <input type="password" id="password" name = "password" placeholder="Enter your password" required />
+      </div>
+        <button type="submit">Log In</button>
+      <p class="sign_up">Don't have an account? <a href="#">Sign up</a></p>
+    </form>
+  </div>
+</body>
+</html>
+<!-- onclick='window.location.href="/welcome"' -->

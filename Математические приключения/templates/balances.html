@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Balances</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Montserrat", sans-serif;
+        }
+        body {
+            width: 100%;
+            min-height: 100vh;
+            padding: 0 10px;
+            display: flex;
+            background: #f7df5a;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 435px;
+            background: #fff;
+            border-radius: 20px;
+            padding: 41px 30px;
+            text-align: center;
+        }
+        h2 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        a {
+            text-decoration: none;
+            color: #37363d;
+            font-weight: 500;
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #fae253;
+            color: #fff;
+            border-radius: 5px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+        a:hover {
+            background-color: #f3cd0f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+      <form action="/welcome/" method="get">
+        <h2>Balances for {{ username }}</h2>
+        <p>USD: {{ balance_usd }}</p>
+        <p>EUR: {{ balance_eur }}</p>
+        <p>RUB: {{ balance_rub }}</p>
+        <a type="submit" href="/welcome/">Back to Main</a>
+      </form>
+    </div>
+</body>
+</html>

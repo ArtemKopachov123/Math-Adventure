@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Questions</title>
+</head>
+<body>
+    <h1>Answer the Questions</h1>
+    <form action="/submit/" method="post">
+        {% for question in questions %}
+            <div>
+                <label>{{ question.text }}</label>
+                <input type="text" name="answer{{ loop.index }}" required>
+            </div>
+        {% endfor %}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

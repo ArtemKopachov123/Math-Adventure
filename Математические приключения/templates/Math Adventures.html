@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Математические Приключения</title>
+<style>
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #5ac0f7;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.container {
+  background-color: #ffffff;
+  border-radius: 50px;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 400px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+h2 {
+  color: #000;
+  margin-bottom: 20px;
+  font-weight: bold;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+button {
+  padding: 20px 20px;
+  background-color: #f3cd0f;
+  color: #000000;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  animation: pulse 1s infinite;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+#mainMenu button {
+  display: block;
+  margin: 10px auto;
+  width: 80%;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#gameContainer, #gameContainer2, #gameContainer3 {
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+#problemText, #problemText2, #problemText3 {
+  font-size: 30px;
+  margin-bottom: 20px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 50px;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+#answerInput, #answerInput2, #answerInput3 {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 50px;
+  font-size: 18px;
+  margin-bottom: 15px;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+#answerInput::placeholder, #answerInput2::placeholder, #answerInput3::placeholder {
+  color: #ccc;
+}
+
+#checkButton, #checkButton2, #checkButton3 {
+  padding: 10px 20px;
+  background-color: #f3cd0f;
+  color: #000000;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  animation: zoomIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+#checkButton:hover, #checkButton2:hover, #checkButton3:hover {
+  background-color: #45a049;
+}
+
+#scoreContainer, #scoreContainer2, #scoreContainer3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-weight: bold;
+  color: #000;
+  font-size: 40px;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+#hintContainer, #hintContainer2, #hintContainer3 {
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 50px;
+  font-weight: bold;
+  color: #000;
+  font-size: 18px;
+  margin-bottom: 20px;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+  display: none;
+}
+
+#mainMenuButton, #mainMenuButton2, #mainMenuButton3 {
+  padding: 20px 20px;
+  background-color: #f3cd0f;
+  color: #000000;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  animation: pulse 1s infinite;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+  display: none;
+}
+
+#mainMenuButton:hover, #mainMenuButton2:hover, #mainMenuButton3:hover {
+  background-color: #45a049;
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background-color: #f3cd0f;
+  border-radius: 50%;
+  animation: confetti 5s linear infinite;
+  display: none;
+}
+
+@keyframes confetti {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  100% { transform: translate(100vw, 50vh) rotate(720deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(-10px); }
+  20% { transform: translateX(10px); }
+  30% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  50% { transform: translateX(-10px); }
+  60% { transform: translateX(10px); }
+  70% { transform: translateX(-10px); }
+  80% { transform: translateX(10px); }
+  90% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
+.cloud {
+  position: absolute;
+  width: 100px;
+  height: 50px;
+  background-image: url('cloud1.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.8;
+  z-index: -1;
+}
+
+@keyframes cloudAnimation {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+#profileContainer {
+  display: none;
+  text-align: center;
+}
+
+#profileAvatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+#profileName {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#profileAchievements {
+  background-color: white;
+  padding: 10px;
+  border-radius: 50px;
+  margin-bottom: 10px;
+}
+
+#profileAchievements h3 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+#profileAchievements ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#profileAchievements li {
+  margin-bottom: 5px;
+}
+
+#feedbackContainer {
+  display: none;
+  text-align: center;
+}
+
+#feedbackQR {
+  width: 200px;
+  height: 200px;
+}
+
+#feedbackQR img {
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#profileContainer .container,
+#feedbackContainer .container {
+  padding: 20px;
+}
+
+#mainMenuButton, #mainMenuButton2, #mainMenuButton3, #profileBackButton, #feedbackBackButton {
+  padding: 10px 20px;
+  background-color: #f3cd0f;
+  color: #000000;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 10px;
+  animation: pulse 1s infinite;
+  animation: fadeIn 1s ease-in-out;
+  animation-iteration-count: 1;
+}
+
+#mainMenuButton:hover, #mainMenuButton2:hover, #mainMenuButton3:hover, #profileBackButton:hover, #feedbackBackButton:hover {
+  background-color: #45a049;
+}
+
+#mainMenuButton, #mainMenuButton2, #mainMenuButton3, #profileBackButton, #feedbackBackButton {
+  display: none;
+}
+</style>
+</head>
+<body>
+<audio id="backgroundMusic" src="background music.mp3" autoplay loop></audio>
+<audio id="winSound" src="win.mp3"></audio>
+<div id="mainMenu" class="container">
+  <h2>Математические Приключения</h2>
+  <button id="profileButton">Профиль</button>
+  <button id="additionSubtractionButton">Сложение/Вычитание</button>
+  <button id="multiplicationDivisionButton">Умножение/Деление</button>
+  <button id="percentageButton">Проценты</button>
+  <button id="feedbackButton">Обратная связь</button>
+</div>
+<div id="cloud1" class="cloud"></div>
+<div id="cloud2" class="cloud"></div>
+<div id="cloud3" class="cloud"></div>
+<div id="cloud4" class="cloud"></div>
+<div id="cloud6" class="cloud"></div>
+<div id="cloud7" class="cloud"></div>
+<div id="cloud8" class="cloud"></div>
+<div id="cloud9" class="cloud"></div>
+<div id="cloud10" class="cloud"></div>
+<div id="cloud11" class="cloud"></div>
+<div id="cloud12" class="cloud"></div>
+<div id="cloud13" class="cloud"></div>
+<div id="additionSubtractionGame" class="container" style="display: none;">
+  <h2 id="gameTitle">Сложение/Вычитание</h2>
+  <button id="startButton">Начать игру</button>
+  <div id="gameContainer" style="display: none;">
+    <h2 id="problemText"></h2>
+    <input type="number" id="answerInput" placeholder="Введи ответ...">
+    <button id="checkButton">Проверить</button>
+    <p id="feedback"></p>
+    <div id="scoreContainer">
+      <p>Счет: <span id="score">0</span></p>
+      <button id="mainMenuButton">Главное меню</button>
+    </div>
+  </div>
+  <div id="hintContainer"></div>
+</div>
+<div id="multiplicationDivisionGame" class="container" style="display: none;">
+  <h2 id="gameTitle2">Умножение/Деление</h2>
+  <button id="startButton2">Начать игру</button>
+  <div id="gameContainer2" style="display: none;">
+    <h2 id="problemText2"></h2>
+    <input type="number" id="answerInput2" placeholder="Введи ответ...">
+    <button id="checkButton2">Проверить</button>
+    <p id="feedback2"></p>
+    <div id="scoreContainer2">
+      <p>Счет: <span id="score2">0</span></p>
+      <button id="mainMenuButton2">Главное меню</button>
+    </div>
+  </div>
+  <div id="hintContainer2"></div>
+</div>
+<div id="percentageGame" class="container" style="display: none;">
+  <h2 id="gameTitle3">Проценты</h2>
+  <button id="startButton3">Начать игру</button>
+  <div id="gameContainer3" style="display: none;">
+    <h2 id="problemText3"></h2>
+    <input type="number" id="answerInput3" placeholder="Введи ответ...">
+    <button id="checkButton3">Проверить</button>
+    <p id="feedback3"></p>
+    <div id="scoreContainer3">
+      <p>Счет: <span id="score3">0</span></p>
+      <button id="mainMenuButton3">Главное меню</button>
+    </div>
+  </div>
+  <div id="hintContainer3"></div>
+</div>
+<div id="confettiContainer">
+</div>
+<div id="profileContainer" class="container">
+  <h2>Профиль</h2>
+  <img src="" id="profileAvatar">
+  <p id="profileName">{{username}}</p>
+  <div id="profileAchievements">
+    <h3>Достижения:</h3>
+    <ul>
+      <li>Реши свой первый пример</li>
+      <li>Реши сложение/вычитание</li>
+      <li>Реши умножение/деление</li>
+      <li>Реши задачу на проценты</li>
+    </ul>
+  </div>
+  <button id="profileBackButton">Вернуться в главное меню</button>
+</div>
+<div id="feedbackContainer" class="container">
+  <h2>Обратная связь</h2>
+  <div id="feedbackQR">
+    <img src="qr_code.jpg">
+  </div>
+  <button id="feedbackBackButton">Вернуться в главное меню</button>
+</div>
+<script>
+const profileButton = document.getElementById('profileButton');
+const additionSubtractionButton = document.getElementById('additionSubtractionButton');
+const multiplicationDivisionButton = document.getElementById('multiplicationDivisionButton');
+const percentageButton = document.getElementById('percentageButton');
+const feedbackButton = document.getElementById('feedbackButton');
+const mainMenu = document.getElementById('mainMenu');
+const additionSubtractionGame = document.getElementById('additionSubtractionGame');
+const multiplicationDivisionGame = document.getElementById('multiplicationDivisionGame');
+const percentageGame = document.getElementById('percentageGame');
+const startButton = document.getElementById('startButton');
+const startButton2 = document.getElementById('startButton2');
+const startButton3 = document.getElementById('startButton3');
+const mainMenuButton = document.getElementById('mainMenuButton');
+const mainMenuButton2 = document.getElementById('mainMenuButton2');
+const mainMenuButton3 = document.getElementById('mainMenuButton3');
+const gameContainer = document.getElementById('gameContainer');
+const gameContainer2 = document.getElementById('gameContainer2');
+const gameContainer3 = document.getElementById('gameContainer3');
+const problemText = document.getElementById('problemText');
+const problemText2 = document.getElementById('problemText2');
+const problemText3 = document.getElementById('problemText3');
+const answerInput = document.getElementById('answerInput');
+const answerInput2 = document.getElementById('answerInput2');
+const answerInput3 = document.getElementById('answerInput3');
+const checkButton = document.getElementById('checkButton');
+const checkButton2 = document.getElementById('checkButton2');
+const checkButton3 = document.getElementById('checkButton3');
+const feedback = document.getElementById('feedback');
+const feedback2 = document.getElementById('feedback2');
+const feedback3 = document.getElementById('feedback3');
+const scoreSpan = document.getElementById('score');
+const scoreSpan2 = document.getElementById('score2');
+const scoreSpan3 = document.getElementById('score3');
+const hintContainer = document.getElementById('hintContainer');
+const hintContainer2 = document.getElementById('hintContainer2');
+const hintContainer3 = document.getElementById('hintContainer3');
+const gameTitle = document.getElementById('gameTitle');
+const gameTitle2 = document.getElementById('gameTitle2');
+const gameTitle3 = document.getElementById('gameTitle3');
+const profileContainer = document.getElementById('profileContainer');
+const feedbackContainer = document.getElementById('feedbackContainer');
+const profileAvatar = document.getElementById('profileAvatar');
+const profileName = document.getElementById('profileName');
+const profileBackButton = document.getElementById('profileBackButton');
+const feedbackBackButton = document.getElementById('feedbackBackButton');
+const confettiContainer = document.getElementById('confettiContainer');
+const winSound = document.getElementById('winSound');
+let score = 0;
+let score2 = 0;
+let score3 = 0;
+let level = 1;
+let level2 = 1;
+let level3 = 1;
+let problem;
+const correctSound = new Audio('correct.mp3');
+const incorrectSound = new Audio('incorrect.mp3');
+const backgroundMusic = new Audio('background music.mp3');
+function generateProblem() {
+  const operators = ['+', '-'];
+  const operator = operators[Math.floor(Math.random() * operators.length)];
+  let num1, num2;
+  if (level <= 3) {
+    num1 = Math.floor(Math.random() * 10) + 1;
+    num2 = Math.floor(Math.random() * 10) + 1;
+  } else if (level <= 5) {
+    num1 = Math.floor(Math.random() * 20) + 1;
+    num2 = Math.floor(Math.random() * 20) + 1;
+  } else {
+    num1 = Math.floor(Math.random() * 100) + 1;
+    num2 = Math.floor(Math.random() * 100) + 1;
+    operators.push('/');
+  }
+  if (operator === '-') {
+    while (num1 < num2) {
+      num1 = Math.floor(Math.random() * 10) + 1;
+      num2 = Math.floor(Math.random() * 10) + 1;
+    }
+  }
+  if (level >= 5) {
+    let num3 = Math.floor(Math.random() * 10) + 1;
+    problemText.textContent = `${num1} ${operator} ${num2} ${operators[Math.floor(Math.random() * operators.length)]} ${num3} =`;
+  } else {
+    problemText.textContent = `${num1} ${operator} ${num2} =`;
+  }
+  answerInput.value = '';
+  feedback.textContent = '';
+}
+function displayProblem() {
+  generateProblem();
+}
+function checkAnswer() {
+  const userAnswer = parseInt(answerInput.value);
+  const correctAnswer = eval(problemText.textContent.slice(0, -1));
+  if (userAnswer === correctAnswer) {
+    feedback.textContent = 'Правильно!';
+    score++;
+    level++;
+    scoreSpan.textContent = score;
+    displayProblem();
+    correctSound.play();
+  } else {
+    incorrectSound.play();
+    const hints = [
+      "Помни, что умножение - это многократное сложение!",
+      "Не забудь, что деление на 0 не определено!",
+      "Умножение/деление всегда первее сложения/вычитания!",
+      "Проверь порядок действий!",
+      "Попробуй разбить задачу на более простые части!"
+    ];
+    const randomHint = hints[Math.floor(Math.random() * hints.length)];
+    hintContainer.textContent = randomHint;
+    hintContainer.style.display = 'none';
+  }
+}
+function generateProblem2() {
+  const operators = ['*', '/'];
+  const operator = operators[Math.floor(Math.random() * operators.length)];
+  let num1, num2;
+  if (level2 <= 3) {
+    num1 = Math.floor(Math.random() * 10) + 1;
+    num2 = Math.floor(Math.random() * 10) + 1;
+  } else if (level2 <= 5) {
+    num1 = Math.floor(Math.random() * 20) + 1;
+    num2 = Math.floor(Math.random() * 20) + 1;
+  } else {
+    num1 = Math.floor(Math.random() * 100) + 1;
+    num2 = Math.floor(Math.random() * 100) + 1;
+  }
+  if (operator === '/' && num2 === 0) {
+    generateProblem2();
+    return;
+  }
+  if (operator === '/' && num1 % num2 !== 0) {
+    generateProblem2();
+    return;
+  }
+  problemText2.textContent = `${num1} ${operator} ${num2} =`;
+  answerInput2.value = '';
+  feedback2.textContent = '';
+}
+function displayProblem2() {
+  generateProblem2();
+}
+function checkAnswer2() {
+  const userAnswer = parseInt(answerInput2.value);
+  const correctAnswer = eval(problemText2.textContent.slice(0, -1));
+  if (userAnswer === correctAnswer) {
+    feedback2.textContent = 'Правильно!';
+    score2++;
+    level2++;
+    scoreSpan2.textContent = score2;
+    displayProblem2();
+    correctSound.play();
+  } else {
+    incorrectSound.play();
+    const hints = [
+      "Помни, что умножение - это многократное сложение!",
+      "Не забудь, что деление на 0 не определено!",
+      "Умножение/деление всегда первее сложения/вычитания!",
+      "Проверь порядок действий!",
+      "Попробуй разбить задачу на более простые части!"
+    ];
+    const randomHint = hints[Math.floor(Math.random() * hints.length)];
+    hintContainer2.textContent = randomHint;
+    hintContainer2.style.display = 'none';
+  }
+}
+function generateProblem3() {
+  let number, percentage, result;
+  do {
+    number = Math.floor(Math.random() * 100) + 1;
+    percentage = Math.floor(Math.random() * 100) + 1;
+    result = (percentage / 100) * number;
+  } while (result % 1 !== 0);
+  problemText3.textContent = `${percentage}% от ${number} =`;
+  answerInput3.value = '';
+  feedback3.textContent = '';
+}
+function displayProblem3() {
+  generateProblem3();
+}
+function checkAnswer3() {
+  const userAnswer = parseInt(answerInput3.value);
+  const correctAnswer = (parseInt(problemText3.textContent.split(' ')[0]) / 100) * parseInt(problemText3.textContent.split(' ')[2]);
+  if (userAnswer === correctAnswer) {
+    feedback3.textContent = 'Правильно!';
+    score3++;
+    level3++;
+    scoreSpan3.textContent = score3;
+    displayProblem3();
+    correctSound.play();
+  } else {
+    incorrectSound.play();
+    const hints = [
+      "Помни, что процент - это часть от целого.",
+      "Раздели процент на 100 и умножь на число."
+    ];
+    const randomHint = hints[Math.floor(Math.random() * hints.length)];
+    hintContainer3.textContent = randomHint;
+    hintContainer3.style.display = 'none';
+  }
+}
+startButton.addEventListener('click', () => {
+  gameTitle.textContent = 'Набери 5 очков';
+  startButton.style.display = 'none';
+  gameContainer.style.display = 'block';
+  displayProblem();
+  mainMenuButton.style.display = 'block';
+});
+checkButton.addEventListener('click', checkAnswer);
+startButton2.addEventListener('click', () => {
+  gameTitle2.textContent = 'Набери 5 очков';
+  startButton2.style.display = 'none';
+  gameContainer2.style.display = 'block';
+  displayProblem2();
+  mainMenuButton2.style.display = 'block';
+});
+checkButton2.addEventListener('click', checkAnswer2);
+startButton3.addEventListener('click', () => {
+  gameTitle3.textContent = 'Набери 5 очков';
+  startButton3.style.display = 'none';
+  gameContainer3.style.display = 'block';
+  displayProblem3();
+  mainMenuButton3.style.display = 'block';
+});
+checkButton3.addEventListener('click', checkAnswer3);
+mainMenuButton.addEventListener('click', () => {
+  mainMenuButton.style.display = 'none';
+  gameContainer.style.display = 'none';
+  startButton.style.display = 'block';
+  hintContainer.style.display = 'none';
+  level = 1;
+  score = 0;
+  scoreSpan.textContent = '0';
+  feedback.textContent = '';
+  problemText.textContent = '';
+  answerInput.value = '';
+  checkButton.disabled = false;
+  gameTitle.textContent = 'Сложение/Вычитание';
+  confettiContainer.innerHTML = '';
+  additionSubtractionGame.style.display = 'none';
+  mainMenu.style.display = 'block';
+});
+mainMenuButton2.addEventListener('click', () => {
+  mainMenuButton2.style.display = 'none';
+  gameContainer2.style.display = 'none';
+  startButton2.style.display = 'block';
+  hintContainer2.style.display = 'none';
+  level2 = 1;
+  score2 = 0;
+  scoreSpan2.textContent = '0';
+  feedback2.textContent = '';
+  problemText2.textContent = '';
+  answerInput2.value = '';
+  checkButton2.disabled = false;
+  gameTitle2.textContent = 'Умножение/Деление';
+  confettiContainer.innerHTML = '';
+  multiplicationDivisionGame.style.display = 'none';
+  mainMenu.style.display = 'block';
+});
+mainMenuButton3.addEventListener('click', () => {
+  mainMenuButton3.style.display = 'none';
+  gameContainer3.style.display = 'none';
+  startButton3.style.display = 'block';
+  hintContainer3.style.display = 'none';
+  level3 = 1;
+  score3 = 0;
+  scoreSpan3.textContent = '0';
+  feedback3.textContent = '';
+  problemText3.textContent = '';
+  answerInput3.value = '';
+  checkButton3.disabled = false;
+  gameTitle3.textContent = 'Проценты';
+  confettiContainer.innerHTML = '';
+  percentageGame.style.display = 'none';
+  mainMenu.style.display = 'block';
+});
+checkButton.addEventListener('click', () => {
+  if (score >= 5) {
+    checkButton.disabled = true;
+    gameTitle.textContent = 'Ты победил!';
+    winSound.play();
+    problemText.textContent = '';
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.top = `${Math.random() * 100}%`;
+      confetti.style.left = `${Math.random() * 100}%`;
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 50%, 50%)`;
+      confettiContainer.appendChild(confetti);
+      confetti.style.display = 'block';
+    }
+  }
+});
+checkButton2.addEventListener('click', () => {
+  if (score2 >= 5) {
+    checkButton2.disabled = true;
+    gameTitle2.textContent = 'Ты победил!';
+    winSound.play();
+    problemText2.textContent = '';
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.top = `${Math.random() * 100}%`;
+      confetti.style.left = `${Math.random() * 100}%`;
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 50%, 50%)`;
+      confettiContainer.appendChild(confetti);
+      confetti.style.display = 'block';
+    }
+  }
+});
+checkButton3.addEventListener('click', () => {
+  if (score3 >= 5) {
+    checkButton3.disabled = true;
+    gameTitle3.textContent = 'Ты победил!';
+    winSound.play();
+    problemText3.textContent = '';
+    for (let i = 0; i < 50; i++) {
+      const confetti = document.createElement('div');
+      confetti.classList.add('confetti');
+      confetti.style.top = `${Math.random() * 100}%`;
+      confetti.style.left = `${Math.random() * 100}%`;
+      confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 50%, 50%)`;
+      confettiContainer.appendChild(confetti);
+      confetti.style.display = 'block';
+    }
+  }
+});
+additionSubtractionButton.addEventListener('click', () => {
+  mainMenu.style.display = 'none';
+  additionSubtractionGame.style.display = 'block';
+});
+multiplicationDivisionButton.addEventListener('click', () => {
+  mainMenu.style.display = 'none';
+  multiplicationDivisionGame.style.display = 'block';
+});
+percentageButton.addEventListener('click', () => {
+  mainMenu.style.display = 'none';
+  percentageGame.style.display = 'block';
+});
+profileButton.addEventListener('click', () => {
+  mainMenu.style.display = 'none';
+  profileContainer.style.display = 'block';
+  profileBackButton.style.display = 'block';
+});
+feedbackButton.addEventListener('click', () => {
+  mainMenu.style.display = 'none';
+  feedbackContainer.style.display = 'block';
+  feedbackBackButton.style.display = 'block';
+});
+profileBackButton.addEventListener('click', () => {
+  profileContainer.style.display = 'none';
+  profileBackButton.style.display = 'none';
+  mainMenu.style.display = 'block';
+});
+feedbackBackButton.addEventListener('click', () => {
+  feedbackContainer.style.display = 'none';
+  feedbackBackButton.style.display = 'none';
+  mainMenu.style.display = 'block';
+});
+function positionClouds() {
+  const clouds = document.querySelectorAll('.cloud');
+  clouds.forEach(cloud => {
+    cloud.style.top = `${Math.random() * 80}%`;
+    cloud.style.left = `${Math.random() * 100}%`;
+    cloud.style.animation = 'cloudAnimation 10s linear infinite';
+  });
+}
+positionClouds();
+</script>
+</body>
+</html>
